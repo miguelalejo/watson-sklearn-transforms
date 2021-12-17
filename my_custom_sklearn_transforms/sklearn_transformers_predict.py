@@ -117,6 +117,6 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
         df_rules = df_rules.drop_duplicates(['antecedents','consequents'], keep='first')   
         df_respuetas_final = data.copy()
         df_respuetas_final[columnas_recomendacion] = df_respuetas_final.apply(lambda row : self.crear_recomendaciones(row,df_rules), axis = 1, result_type ='expand')
-        self.df_respuetas[col_target]= df_respuetas_final[col_target]
+        self.df_respuetas[self.col_target]= df_respuetas_final[self.col_target]
         return self.df_respuetas
   
