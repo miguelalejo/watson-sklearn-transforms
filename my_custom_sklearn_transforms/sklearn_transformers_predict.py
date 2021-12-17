@@ -1,3 +1,4 @@
+!pip install fastcore==1.3.19
 from sklearn.base import BaseEstimator, TransformerMixin, ClusterMixin
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
