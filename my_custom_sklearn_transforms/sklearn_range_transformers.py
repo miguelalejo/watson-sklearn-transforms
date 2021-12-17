@@ -48,7 +48,7 @@ class CrearNuevosRangosColumnas(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
 
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
 
     def crearRangoEdad(self, df_base):

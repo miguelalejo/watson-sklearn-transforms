@@ -23,7 +23,7 @@ class DropColumns(BaseEstimator, TransformerMixin):
 # Un transformador para remover columnas indeseadas
 class DropDuplicados(BaseEstimator, TransformerMixin):           
 
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
 
     def transform(self, X):
@@ -67,7 +67,7 @@ class DataOneHotEncoderTransform(TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
         
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
     
     def transform(self, X):    
@@ -85,7 +85,7 @@ class ConvertBinaryTransform(TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
         
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
     
     def transform(self, X):    
@@ -98,7 +98,7 @@ class DataLabelEncoderTransform(TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
         
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
     
     def transform(self, X):    
