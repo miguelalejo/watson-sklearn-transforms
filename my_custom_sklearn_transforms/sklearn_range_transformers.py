@@ -11,7 +11,7 @@ class CrearNuevasCategoriasTransform(TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
         
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
     
   
@@ -35,7 +35,7 @@ class ConvertCrearTransaccionesTransform(TransformerMixin):
         self.columns = columns
         self.transacciones = transacciones
         
-    def fit(self, X):
+    def fit(self, X, y=None):
         return self
     
     def transform(self, X):    
