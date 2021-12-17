@@ -94,7 +94,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     def fit(self, X):
         return self
 
-    def predict(X):     
+    def predict(self,X):     
         data = X.copy()                        
         lista_reglas = []
         columnas_recomendacion = ['RECOMMENDATION_1','CONFIDENCE_1','LIFT_1','SUPPORT_1',
