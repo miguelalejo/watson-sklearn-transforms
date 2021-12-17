@@ -18,7 +18,7 @@ class TransformedTargetClassifier(ClusterMixin, BaseEstimator, TransformerMixin)
         self.classifier = classifier        
         self.column = column
     
-     def fit(self, X):
+    def fit(self, X):
         return self
     
     def transform(self, X):
