@@ -1,4 +1,3 @@
-!pip install fastcore==1.3.19
 from sklearn.base import BaseEstimator, TransformerMixin, ClusterMixin
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
@@ -10,7 +9,6 @@ import numpy as np
 from typing import Union, Any
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
-from fastcore.basics import patch
 
 class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     """A meta estimator that both transforms the response variable.
@@ -92,7 +90,6 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
             lista_rules.append(restulados_sort_temp)
         return lista_rules    
         
-    @patch
     def predict(self: TransformedPredictClassifier, X: SklearnInput):     
         data = X.copy()                        
         lista_reglas = []
