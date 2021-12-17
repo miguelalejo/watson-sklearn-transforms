@@ -93,6 +93,9 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     def predict(X):     
         data = X.copy()                        
         lista_reglas = []
+        columnas_recomendacion = ['RECOMMENDATION_1','CONFIDENCE_1','LIFT_1','SUPPORT_1',
+         'RECOMMENDATION_2','CONFIDENCE_2','LIFT_2','SUPPORT_2',
+         'RECOMMENDATION_3','CONFIDENCE_3','LIFT_3','SUPPORT_3','NRO_REGLAS']
         for columna_mod_kmeans in self.columnas_clusters_kmeans:
             lista_reglas_temp = crear_reglas_cluster_id(data,columna_mod_kmeans,self.columnas_productos)
             lista_reglas.extend(lista_reglas_temp)
