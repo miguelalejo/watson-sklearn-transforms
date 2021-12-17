@@ -29,6 +29,6 @@ class TransformedTargetClassifier(ClusterMixin, BaseEstimator, TransformerMixin)
         df_data_base =  data[[self.column,'long_productos']]
         df_modelo_data = self.transformer.transform(df_data_base)
         modelo_saved = self.classifier
-        df_modelo_data['Cluster'+self.colum] = modelo_saved.predict(df_modelo_data)
-        return pd.concat([data,df_modelo_data['Cluster'+self.colum]],axis=1)
+        df_modelo_data['Cluster'+self.column] = modelo_saved.predict(df_modelo_data)
+        return pd.concat([data,df_modelo_data['Cluster'+self.column]],axis=1)
   
