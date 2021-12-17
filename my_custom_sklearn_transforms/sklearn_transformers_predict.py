@@ -89,7 +89,11 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
             print("Tamanio items: {fitem} - Tamanio Reglas Ordenadas: {freg}".format(fitem=len(frequent_itemsets_temp),freg=len(restulados_sort_temp )))
             lista_rules.append(restulados_sort_temp)
         return lista_rules    
-        
+    
+    
+    def fit(self, X):
+        return self
+
     def predict(X):     
         data = X.copy()                        
         lista_reglas = []
