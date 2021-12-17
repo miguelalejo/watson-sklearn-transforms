@@ -97,6 +97,10 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     
     def fit(self, X):
         return self
+    
+     def transform(self, X):
+        data = X.copy()        
+        return data
 
     def predict(self,X):     
         data = X.copy()                        
