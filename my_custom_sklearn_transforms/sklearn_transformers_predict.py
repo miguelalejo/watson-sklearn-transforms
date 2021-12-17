@@ -9,6 +9,7 @@ import numpy as np
 from typing import Union, Any
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
+from fastcore.basics import patch
 
 class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     """A meta estimator that both transforms the response variable.
