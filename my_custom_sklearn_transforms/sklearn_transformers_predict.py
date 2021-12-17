@@ -21,6 +21,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     def __init__(self, columnas_clusters_kmeans,columnas_productos):
         self.columnas_clusters_kmeans = columnas_clusters_kmeans
         self.columnas_productos = columnas_productos
+        self.col_reglas_orden = ['confidence','lift']
     
     def ordernar_lista(self, lista):
         lista_temp = [v for v in lista if v in self.columnas_productos]  
@@ -50,7 +51,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
         fvalor_dat = frozenset(row['set_datos'])  
         df_reglas_dat=reglas[reglas.apply(lambda x:self.validar_antecedente(x,fvalor_dat), axis = 1)]
         df_reglas_temp = pd.concat([df_reglas_prod,df_reglas_dat]).drop_duplicates()
-        df_reglas = df_reglas_temp.sort_values(col_reglas_orden, ascending =[False, False]).head(3)
+        df_reglas = df_reglas_temp.sort_values(self.col_reglas_orden, ascending =[False, False]).head(3)
         #print(df_reglas)
         if len(df_reglas)>0:
             nro_reglas = len(df_reglas)
@@ -88,7 +89,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
             print(len(df_temp_cluster[self.columnas_productos].columns))
             frequent_itemsets_temp = apriori(df_temp_cluster[self.columnas_productos], min_support=0.10, use_colnames=True,max_len=5)
             rules_mlxtend_temp = association_rules(frequent_itemsets_temp,metric="confidence", min_threshold=0.8)
-            restulados_sort_temp = rules_mlxtend_temp.sort_values(col_reglas_orden, ascending =[False, False])  
+            restulados_sort_temp = rules_mlxtend_temp.sort_values(self.col_reglas_orden, ascending =[False, False])  
             print("Tamanio items: {fitem} - Tamanio Reglas Ordenadas: {freg}".format(fitem=len(frequent_itemsets_temp),freg=len(restulados_sort_temp )))
             lista_rules.append(restulados_sort_temp)
         return lista_rules    
