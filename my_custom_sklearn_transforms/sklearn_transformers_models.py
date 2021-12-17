@@ -5,6 +5,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 import numpy as np
+from typing import Union, Any
 
 class TransformedTargetClassifier(ClusterMixin, BaseEstimator, TransformerMixin):
     """A meta estimator that both transforms the response variable.
