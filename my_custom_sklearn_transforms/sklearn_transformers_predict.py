@@ -90,7 +90,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
             lista_rules.append(restulados_sort_temp)
         return lista_rules    
         
-    def predict(X: SklearnInput):     
+    def predict(X):     
         data = X.copy()                        
         lista_reglas = []
         for columna_mod_kmeans in self.columnas_clusters_kmeans:
