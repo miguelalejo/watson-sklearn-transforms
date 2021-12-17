@@ -107,7 +107,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
         for columna_mod_kmeans in self.columnas_clusters_kmeans:
             lista_reglas_temp = self.crear_reglas_cluster_id(data,columna_mod_kmeans)
             lista_reglas.extend(lista_reglas_temp)
-        df_rules = pd.concat(lista_reglas).sort_values(col_reglas_orden, ascending =[False, False])
+        df_rules = pd.concat(lista_reglas).sort_values(self.col_reglas_orden, ascending =[False, False])
         df_rules = df_rules.drop_duplicates(['antecedents','consequents'], keep='first')   
         df_respuetas_final = data.copy()
         df_respuetas_final[columnas_recomendacion] = df_respuetas_final.apply(lambda row : self.crear_recomendaciones(row,df_rules), axis = 1, result_type ='expand')
