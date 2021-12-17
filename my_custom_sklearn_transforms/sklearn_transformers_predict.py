@@ -18,10 +18,12 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
         transformer: An instance of a class that inherits from TransformerMixin
 
     """
-    def __init__(self, columnas_clusters_kmeans,columnas_productos):
+    def __init__(self, df_respuetas, col_target,columnas_clusters_kmeans,columnas_productos):
         self.columnas_clusters_kmeans = columnas_clusters_kmeans
         self.columnas_productos = columnas_productos
         self.col_reglas_orden = ['confidence','lift']
+        self.df_respuetas = df_respuetas
+        self.col_target = col_target
     
     def ordernar_lista(self, lista):
         lista_temp = [v for v in lista if v in self.columnas_productos]  
@@ -115,5 +117,6 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
         df_rules = df_rules.drop_duplicates(['antecedents','consequents'], keep='first')   
         df_respuetas_final = data.copy()
         df_respuetas_final[columnas_recomendacion] = df_respuetas_final.apply(lambda row : self.crear_recomendaciones(row,df_rules), axis = 1, result_type ='expand')
-        return df_respuetas_final
+        self.df_respuetas[col_target]= df_respuetas_final[col_target]
+        return self.df_respuetas
   
