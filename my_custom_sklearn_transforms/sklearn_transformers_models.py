@@ -14,16 +14,18 @@ class TransformedTargetClassifier(ClusterMixin, BaseEstimator, TransformerMixin)
         transformer: An instance of a class that inherits from TransformerMixin
 
     """
-    def __init__(self, column, classifier: BaseEstimator):
+    def __init__(self, column, classifier: BaseEstimator, transformer: Union[TransformerMixin, Pipeline]):
         self.classifier = classifier        
         self.column = column
+        self.transformer = transformer
     
     def fit(self, X):
         return self
     
     def transform(self, X):
         data = X.copy() 
-        df_modelo_data =  data[[self.column,'long_productos']]       
+        df_data_base =  data[[self.column,'long_productos']]
+        df_modelo_data = self.transformer.transform(df_data_base)
         modelo_saved = self.classifier
         df_modelo_data['Cluster'] = modelo_saved.predict(df_modelo_data)
         return pd.concat([data,df_modelo_data['Cluster']],axis=1)
