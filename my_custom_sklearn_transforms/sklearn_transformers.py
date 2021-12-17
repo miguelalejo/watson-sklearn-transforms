@@ -23,7 +23,7 @@ class DropColumns(BaseEstimator, TransformerMixin):
 # Un transformador para remover columnas indeseadas
 class DropDuplicados(BaseEstimator, TransformerMixin):           
 
-    def fit(self, X, y=None):
+    def fit(self, X):
         return self
 
     def transform(self, X):
