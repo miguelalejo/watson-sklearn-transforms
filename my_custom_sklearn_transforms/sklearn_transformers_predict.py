@@ -24,7 +24,7 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     
     def ordernar_lista(self, lista):
         lista_temp = [v for v in lista if v in self.columnas_productos]  
-    return sorted(lista_temp,key=self.columnas_productos.index)
+        return sorted(lista_temp,key=self.columnas_productos.index)
 
     def validar_antecedente(self, row,fvalor):
         valor_antecente = row['antecedents']  
