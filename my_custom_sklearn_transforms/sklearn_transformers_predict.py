@@ -24,56 +24,56 @@ class TransformedPredictClassifier(BaseEstimator, TransformerMixin):
     
     
     def validar_antecedente(row,fvalor):
-    valor_antecente = row['antecedents']  
-    resultado = valor_antecente.issubset(fvalor)&valor_antecente.issuperset(fvalor)
-    return resultado
+        valor_antecente = row['antecedents']  
+        resultado = valor_antecente.issubset(fvalor)&valor_antecente.issuperset(fvalor)
+        return resultado
 
     def crear_recomendaciones(row,reglas):
-    RECOMMENDATION_1=''
-    CONFIDENCE_1=''
-    RECOMMENDATION_2=''
-    CONFIDENCE_2=''
-    RECOMMENDATION_3=''
-    CONFIDENCE_3=''
-    LIFT_1=-1
-    SUPPORT_1=-1
-    LIFT_2=-1
-    SUPPORT_2=-1
-    LIFT_3=-1
-    SUPPORT_3=-1
-    NRO_REGLAS = len(reglas)  
-    fvalor_prod = frozenset(row['set_productos'])  
-    df_reglas_prod=reglas[reglas.apply(lambda x:validar_antecedente(x,fvalor_prod), axis = 1)]
-    fvalor_dat = frozenset(row['set_datos'])  
-    df_reglas_dat=reglas[reglas.apply(lambda x:validar_antecedente(x,fvalor_dat), axis = 1)]
-    df_reglas_temp = pd.concat([df_reglas_prod,df_reglas_dat]).drop_duplicates()
-    df_reglas = df_reglas_temp.sort_values(col_reglas_orden, ascending =[False, False]).head(3)
-    #print(df_reglas)
-    if len(df_reglas)>0:
-        nro_reglas = len(df_reglas)
-        for i in range(0,nro_reglas):
-        #print(i)
-        if i==0:
-            lista_ordenada = ordernar_lista(list(df_reglas.iloc[i]['consequents']))        
-            RECOMMENDATION_1 = ",".join(lista_ordenada)
-            CONFIDENCE_1 = df_reglas.iloc[i]['confidence']
-            LIFT_1 = float(df_reglas.iloc[i]['lift'])
-            SUPPORT_1 = float(df_reglas.iloc[i]['support'])
-        elif i==1:
-            lista_ordenada = ordernar_lista(list(df_reglas.iloc[i]['consequents']))
-            RECOMMENDATION_2 = ",".join(lista_ordenada)
-            CONFIDENCE_2 = df_reglas.iloc[i]['confidence']
-            LIFT_2 = float(df_reglas.iloc[i]['lift'])
-            SUPPORT_2 = float(df_reglas.iloc[i]['support'])
-        elif i==2:
-            lista_ordenada = ordernar_lista(list(df_reglas.iloc[i]['consequents']))
-            RECOMMENDATION_3 =  ",".join(lista_ordenada)
-            CONFIDENCE_3 = df_reglas.iloc[i]['confidence']
-            LIFT_3 = float(df_reglas.iloc[i]['lift'])
-            SUPPORT_3 = float(df_reglas.iloc[i]['support'])
-        else:
-            break          
-    return RECOMMENDATION_1,CONFIDENCE_1,LIFT_1,SUPPORT_1,RECOMMENDATION_2,CONFIDENCE_2,LIFT_2,SUPPORT_2,RECOMMENDATION_3,CONFIDENCE_3,LIFT_3,SUPPORT_3,NRO_REGLAS
+        RECOMMENDATION_1=''
+        CONFIDENCE_1=''
+        RECOMMENDATION_2=''
+        CONFIDENCE_2=''
+        RECOMMENDATION_3=''
+        CONFIDENCE_3=''
+        LIFT_1=-1
+        SUPPORT_1=-1
+        LIFT_2=-1
+        SUPPORT_2=-1
+        LIFT_3=-1
+        SUPPORT_3=-1
+        NRO_REGLAS = len(reglas)  
+        fvalor_prod = frozenset(row['set_productos'])  
+        df_reglas_prod=reglas[reglas.apply(lambda x:validar_antecedente(x,fvalor_prod), axis = 1)]
+        fvalor_dat = frozenset(row['set_datos'])  
+        df_reglas_dat=reglas[reglas.apply(lambda x:validar_antecedente(x,fvalor_dat), axis = 1)]
+        df_reglas_temp = pd.concat([df_reglas_prod,df_reglas_dat]).drop_duplicates()
+        df_reglas = df_reglas_temp.sort_values(col_reglas_orden, ascending =[False, False]).head(3)
+        #print(df_reglas)
+        if len(df_reglas)>0:
+            nro_reglas = len(df_reglas)
+            for i in range(0,nro_reglas):
+            #print(i)
+            if i==0:
+                lista_ordenada = ordernar_lista(list(df_reglas.iloc[i]['consequents']))        
+                RECOMMENDATION_1 = ",".join(lista_ordenada)
+                CONFIDENCE_1 = df_reglas.iloc[i]['confidence']
+                LIFT_1 = float(df_reglas.iloc[i]['lift'])
+                SUPPORT_1 = float(df_reglas.iloc[i]['support'])
+            elif i==1:
+                lista_ordenada = ordernar_lista(list(df_reglas.iloc[i]['consequents']))
+                RECOMMENDATION_2 = ",".join(lista_ordenada)
+                CONFIDENCE_2 = df_reglas.iloc[i]['confidence']
+                LIFT_2 = float(df_reglas.iloc[i]['lift'])
+                SUPPORT_2 = float(df_reglas.iloc[i]['support'])
+            elif i==2:
+                lista_ordenada = ordernar_lista(list(df_reglas.iloc[i]['consequents']))
+                RECOMMENDATION_3 =  ",".join(lista_ordenada)
+                CONFIDENCE_3 = df_reglas.iloc[i]['confidence']
+                LIFT_3 = float(df_reglas.iloc[i]['lift'])
+                SUPPORT_3 = float(df_reglas.iloc[i]['support'])
+            else:
+                break          
+        return RECOMMENDATION_1,CONFIDENCE_1,LIFT_1,SUPPORT_1,RECOMMENDATION_2,CONFIDENCE_2,LIFT_2,SUPPORT_2,RECOMMENDATION_3,CONFIDENCE_3,LIFT_3,SUPPORT_3,NRO_REGLAS
 
     def crear_reglas_cluster_id(df_clusters_merge, nombre_cluster,columnas_productos):
         tipos_clusters = df_clusters_merge[nombre_cluster].value_counts()
